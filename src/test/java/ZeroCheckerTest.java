@@ -1,8 +1,11 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by GM on 5/5/2016.
@@ -10,10 +13,13 @@ import static org.junit.Assert.assertTrue;
 public class ZeroCheckerTest {
 
     private ZeroChecker zChick;
+    private ValidChecker valid;
 
     @Before
     public void setup(){
-        zChick = new ZeroChecker();
+        MockitoAnnotations.initMocks(this);
+        valid = mock(ValidChecker.class);
+        zChick = new ZeroChecker(valid);
     }
 
     @Test
@@ -41,5 +47,10 @@ public class ZeroCheckerTest {
         assertFalse(zChick.checkIfZero(17));
     }
 
+    @Test
+    public void testWithMock(){
+        when(valid.dumbChecker()).thenReturn(true);
+        assertFalse(zChick.checkIfZeroWithMockito(4));
+    }
 
 }

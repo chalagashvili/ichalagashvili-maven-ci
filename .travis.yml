@@ -1,8 +1,8 @@
 language: java
- jdk:
+jdk:
    - oraclejdk8
  
- script: mvn package
+script: mvn package
  
- after_success:
+after_success:
    - mvn clean test 
